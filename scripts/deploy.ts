@@ -39,10 +39,11 @@ async function main() {
 
   const contractUSDC = Token__factory.connect(USDC, owner) as Token;
   const contractBUSD = Token__factory.connect(BUSD, owner) as Token;
-
-  await contractUSDC.mint(owner.address, parseEther("2000"));
-  await contractBUSD.mint(owner.address, VALUE);
-
+  
+  const tx1 = await contractUSDC.mint(owner.address, parseEther("2000"));
+  const tx2 = await contractBUSD.mint(owner.address, VALUE);
+  tx1.wait();
+  tx2.wait();
   // await contractUSDC.approve(router, ethers.constants.MaxUint256);
   // await contractBUSD.approve(router, ethers.constants.MaxUint256);
 
